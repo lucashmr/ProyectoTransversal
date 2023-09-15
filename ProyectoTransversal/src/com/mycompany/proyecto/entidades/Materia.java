@@ -10,7 +10,7 @@ public class Materia {
 
     private boolean activo;
 
-    public Materia(int idMateria) {
+    public Materia(int idMateria, String string) {
         this.idMateria = idMateria;
     }
 
