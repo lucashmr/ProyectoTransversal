@@ -16,8 +16,8 @@ public class Alumno {
 
     private boolean estado;
 
-    public Alumno(int idAlumno) {
-        this.idAlumno = idAlumno;
+    public Alumno() {
+       
     }
 
     public Alumno(int idAlumno, int dni, String apellido, String nombre, LocalDate fechaNac, boolean estado) {
@@ -36,7 +36,7 @@ public class Alumno {
         this.fechaNac = fechaNac;
         this.estado = estado;
     }
-
+//getter y setters
     public int getIdAlumno() {
         return idAlumno;
     }
