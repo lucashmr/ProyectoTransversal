@@ -7,20 +7,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 
 public class MateriaData {
 
     private Connection con;
-
+ Connection conexion = null;
+    PreparedStatement statement = null;
     public MateriaData() {
     }
-    
+    //constructor vacio
     
     
   public void guardarMateria(Materia materia) {
-    Connection conexion = null;
-    PreparedStatement statement = null;
+  
 
     try {
         //insert materia
@@ -36,14 +37,16 @@ public class MateriaData {
         // Ejecutar la consulta
         statement.executeUpdate();
     } catch (SQLException e) {
-        e.printStackTrace(); // Manejo del error, aquí puedes hacer lo que necesites
+        JOptionPane.showMessageDialog(null,"ERRROR");
+        
     } finally {
         // Cerrar la conexión y el statement
         try {
             if (statement != null) statement.close();
             if (conexion != null) conexion.close();
         } catch (SQLException e) {
-            e.printStackTrace(); // Manejo del error, aquí puedes hacer lo que necesites
+           JOptionPane.showMessageDialog(null,"Error acá");
+            
         }
     }
 }
@@ -56,15 +59,29 @@ public class MateriaData {
 
 
 
-    public Materia buscarMateria(int id) {    //busca materia por su id 
-       
-        
-        
-        return null;
-       
-        
-        
+   public Materia buscarMateria(int id) {
+        Materia materia = null;
+        String query = "SELECT * FROM materias WHERE idMateria = ?";
+        try {
+            PreparedStatement statement = conexion.prepareStatement(query);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                materia.setIdMateria(resultSet.getInt("idMateria"));
+                materia.setNombre(resultSet.getString("nombre"));
+                materia.setAnioMateria(resultSet.getInt("anioMateria"));
+                materia.setActivo(resultSet.getBoolean("activo"));
+            }
+
+            resultSet.close();
+            statement.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"error para buscar materia");
+        }
+        return materia;
     }
+
 
     public void modificarMateria(Materia materia) {  //para modificar alguna materia en concreto
         
