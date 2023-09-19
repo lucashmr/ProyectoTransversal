@@ -61,6 +61,8 @@ public class AlumnoData {
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setInt(1, id);
            ResultSet rs =ps.executeQuery();
+           
+           
             if (rs.next()) {
                 alumno = new Alumno();
                 alumno.setIdAlumno(id);

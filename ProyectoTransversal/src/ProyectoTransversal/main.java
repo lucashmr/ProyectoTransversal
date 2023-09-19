@@ -13,9 +13,11 @@ public class main {
 
     public static void main(String[] args) {
         Connection con = Conexion.getConexion();
-        Materia mate = new Materia (    1,"Matematicas",2,true);
-        MateriaData mat = new MateriaData();
-        mat.guardarMateria(mate);
+//        Materia mate = new Materia (    1,"Matematicas",2,true); //settear variables
+       MateriaData mat = new MateriaData(); 
+//        mat.guardarMateria(mate);
+        
+        Materia materiaEncontrada=mat.buscarMateria(1);
         
 //      //  Alumno juan =new Alumno (12131334,"lima","juan pedro",LocalDate.of(1980, 4, 25),true);
 //        AlumnoData alu = new AlumnoData();
