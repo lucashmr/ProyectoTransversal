@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,13 +22,14 @@ public class AlumnoData {
     con=Conexion.getConexion();
     }
 
-    public Alumno guardarAlumno(Alumno alumno) {
+    public void guardarAlumno(Alumno alumno) {
         
         String sql="INSERT INTO alumno(dni,apellido,nombre,fechaNacimiento,estado)"
                 + "VALUES(? , ? , ? , ? , ?)";
         
         try {
             PreparedStatement ps =con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            //Settear parametros
             ps.setInt(1, alumno.getDni());
             ps.setString(2, alumno.getApellido());
             ps.setString(3,alumno.getNombre());
@@ -48,7 +50,7 @@ public class AlumnoData {
            JOptionPane.showMessageDialog(null, "error al conectar a la tabla alumno");
         }
         
-        return null;
+        
        
     }
 
@@ -113,7 +115,34 @@ public class AlumnoData {
 
     public List<Alumno> listarAlumnos() {
      
-        return null;
+        
+         String sql="SELECT idAlumno,dni,apellido,nombre,fechaNacimiento FROM alumno WHERE  estado=1";
+         ArrayList<Alumno> alumnos=new ArrayList<>(); 
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            
+           ResultSet rs =ps.executeQuery();
+           
+           
+            while (rs.next()) {
+                Alumno alumno = new Alumno();
+                alumno.setIdAlumno(rs.getInt("idAlumno"));
+                alumno.setDni(rs.getInt("dni"));
+                alumno.setApellido(rs.getString("apellido"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
+                alumno.setEstado(true);
+                alumnos.add(alumno);
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"error al acceder a la tabla alumno");
+        }
+        return alumnos;
+        
+        
+        
      
     }
 

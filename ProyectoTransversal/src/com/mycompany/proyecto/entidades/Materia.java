@@ -10,8 +10,7 @@ public class Materia {
 
     private boolean activo;
 
-    public Materia(int idMateria, String string) {
-        this.idMateria = idMateria;
+    public Materia() {  
     }
 
     public Materia(int idMateria, String nombre, int anioMateria, boolean activo) {
