@@ -154,11 +154,15 @@ public class AlumnoData {
                 + "WHERE idAlumno= ?";
         try {
             PreparedStatement ps =con.prepareStatement(sql);
+            
+            //settear 
             ps.setInt(1, alumno.getDni());
             ps.setString(2, alumno.getApellido());
             ps.setString(3, alumno.getNombre());
             ps.setDate(4, Date.valueOf(alumno.getFechaNac()));
             ps.setInt(5, alumno.getIdAlumno());
+            
+            //ejecutar
             int exito=ps.executeUpdate();
             if (exito==1) {
                 JOptionPane.showMessageDialog(null, "alumno modificado");

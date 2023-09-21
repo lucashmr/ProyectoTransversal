@@ -2,6 +2,7 @@ package com.mycompany.proyecto.AccesoADatos;
 
 import com.mycompany.proyecto.entidades.Materia;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -53,15 +54,6 @@ public class MateriaData {
    
   }
 
-      
-  
-        
-        
-    
-
-
-
-
     public Materia buscarMateria(int id) {
         
         String sql = "SELECT idMateria,nombre,anioMateria FROM materia WHERE idMateria=? AND activo=1";
@@ -90,14 +82,54 @@ public class MateriaData {
 
     public void modificarMateria(Materia materia) {  //para modificar alguna materia en concreto
         
+        String sql="UPDATE materia SET nombre= ?,anioMateria= ?, activo= ?" 
+                + " WHERE idMateria= ?";
+               ///PONER ESPACIO DESPUES DEL WHERE
         
+        
+        try {
+            PreparedStatement ps =con.prepareStatement(sql);
+                
+            //settear vars
+            ps.setString(1, materia.getNombre());
+            ps.setInt(2, materia.getAnioMateria());
+            ps.setBoolean(3,materia.isActivo());
+            ps.setInt(4, materia.getIdMateria());
+            
+            //ejecutar
+            int exito=ps.executeUpdate();
+            if (exito==1) {
+                JOptionPane.showMessageDialog(null, "materia modificado");
+            }
+            
+            
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null,"Error al acceder a la tabla materia");
     }
-
+    }
     public void eliminarMateria(int id) {  //para eliminar una materia al alumno
         
-        
+        String sql = "UPDATE materia SET activo = 0 WHERE idMateria=?";
+       
+        try {
+            PreparedStatement ps =con.prepareStatement(sql);
+            ps.setInt(1, id);
+            int exito=ps.executeUpdate();
+            
+            if (exito==1) {
+                JOptionPane.showMessageDialog(null,"materia eliminada");
+            }
+            
+            
+            
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null,"error al acceder a la tabla materia");
+        }
     }
 
+    
+    
+    
    public List<Materia> listarMaterias()  {
         ArrayList<Materia> materias = new ArrayList<>();
         
