@@ -56,25 +56,30 @@ public class MateriaData {
 
     public Materia buscarMateria(int id) {
         
-        String sql = "SELECT idMateria,nombre,anioMateria FROM materia WHERE idMateria=? AND activo=1";
+        String sql = "SELECT idMateria,nombre,anioMateria FROM materia"
+                + " WHERE idMateria= ?  AND activo=1";
+        
         Materia materia = null;
         try {
             PreparedStatement ps=con.prepareStatement(sql);
+            
+            
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
                 materia = new Materia();
-                materia.setIdMateria(rs.getInt("idMateria"));
+                materia.setIdMateria(id);
                 materia.setNombre(rs.getString("nombre"));
                 materia.setAnioMateria(rs.getInt("anioMateria"));
-                materia.setActivo(rs.getBoolean("activo"));
-            }
+                materia.setActivo(true);
+            }else
+                JOptionPane.showMessageDialog(null, "No encontrada en la base de datos");
 
             
             ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null,"error para buscar materia");
+            JOptionPane.showMessageDialog(null,"error al acceder a la tabla materia");
         }
         return materia;
     }

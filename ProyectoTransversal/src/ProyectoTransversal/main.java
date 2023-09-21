@@ -3,7 +3,9 @@ package ProyectoTransversal;
 import com.mycompany.proyecto.AccesoADatos.AlumnoData;
 import com.mycompany.proyecto.AccesoADatos.Conexion;
 import com.mycompany.proyecto.AccesoADatos.MateriaData;
+import com.mycompany.proyecto.AccesoADatos.inscripcionData;
 import com.mycompany.proyecto.entidades.Alumno;
+import com.mycompany.proyecto.entidades.Inscripcion;
 import com.mycompany.proyecto.entidades.Materia;
 import java.sql.Connection;
 import java.time.LocalDate;
@@ -15,11 +17,19 @@ public class main {
         Connection con = Conexion.getConexion();
         
         //MATERIA
-        Materia mate = new Materia (1,"literatura",1,true); //settear variables
-       MateriaData mat = new MateriaData(); 
-       mat.modificarMateria(mate);
+//        Materia mate = new Materia (1,"literatura",1,true); //settear variables
+//      MateriaData mat = new MateriaData(); 
+//       mat.modificarMateria(mate);
       //mat.guardarMateria(mate);
-      //Materia materiaEncontrada=mat.buscarMateria(1);
+//      Materia materiaEncontrada=mat.buscarMateria(1);
+//        if (materiaEncontrada != null) {
+//          System.out.println("ID Materia: " + materiaEncontrada.getIdMateria());
+//            System.out.println("Nombre: " + materiaEncontrada.getNombre());
+//            System.out.println("Año: " + materiaEncontrada.getAnioMateria());
+//            System.out.println("Estado: " + materiaEncontrada.isActivo());
+//        }
+//      
+      
        // mat.eliminarMateria(1);
         
       
@@ -64,7 +74,27 @@ public class main {
 //    mat.listarMaterias(); //listar mats
 
     
-    
-    
+
+//INSCRIPCION
+
+
+//constructores
+   AlumnoData ad = new AlumnoData();
+       MateriaData md = new MateriaData();
+      inscripcionData ind = new inscripcionData();
+        //constructores
+        
+        //buscar alumno y materia
+        Alumno juan = ad.buscarAlumno(7);
+        Materia mate = md.buscarMateria(1);
+        
+      //  crear inscripcion y guardarla
+        Inscripcion insc = new Inscripcion(juan,mate,7);
+//        ind.guardarInscripcion(insc);
+        
+//modificaciones
+//      ind.actualizarNota(7, 1, 5);
+      ind.borrarInscripcion(7,1);
+
     }
 }

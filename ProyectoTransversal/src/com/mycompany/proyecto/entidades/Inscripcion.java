@@ -11,6 +11,7 @@ public class Inscripcion {
     private double nota;
 
     public Inscripcion() {
+        
     }
 
     public Inscripcion(int idInscripcion, Alumno alumno, Materia materia, double nota) {
