@@ -17,10 +17,10 @@ public class main {
         Connection con = Conexion.getConexion();
         
         //MATERIA
-//        Materia mate = new Materia (1,"literatura",1,true); //settear variables
+//        Materia mate = new Materia (3,"ciencias sociales",1,true); //settear variables
 //      MateriaData mat = new MateriaData(); 
-//       mat.modificarMateria(mate);
-      //mat.guardarMateria(mate);
+////       mat.modificarMateria(mate);
+//      mat.guardarMateria(mate);
 //      Materia materiaEncontrada=mat.buscarMateria(1);
 //        if (materiaEncontrada != null) {
 //          System.out.println("ID Materia: " + materiaEncontrada.getIdMateria());
@@ -78,23 +78,40 @@ public class main {
 //INSCRIPCION
 
 
-//constructores
-   AlumnoData ad = new AlumnoData();
-       MateriaData md = new MateriaData();
-      inscripcionData ind = new inscripcionData();
-        //constructores
+//vars
+   AlumnoData ad= new AlumnoData();
+       MateriaData md= new MateriaData();
+      inscripcionData id= new inscripcionData();
+//        
         
         //buscar alumno y materia
-        Alumno juan = ad.buscarAlumno(7);
-        Materia mate = md.buscarMateria(1);
+//        Alumno juan = ad.buscarAlumno(7);
+//        Materia mate = md.buscarMateria(1);
         
-      //  crear inscripcion y guardarla
-        Inscripcion insc = new Inscripcion(juan,mate,7);
-//        ind.guardarInscripcion(insc);
+//        crear inscripcion y guardarla
+//        Inscripcion insc = new Inscripcion(lucas,dibujo,8);
+//        id.guardarInscripcion(insc);
         
 //modificaciones
 //      ind.actualizarNota(7, 1, 5);
-      ind.borrarInscripcion(7,1);
+//      ind.borrarInscripcion(7,1);
 
+
+
+//bucles
+//        for(Inscripcion inscripcion:id.obtenerInscripcion()) {
+//            
+//            System.out.println("id"+inscripcion.getIdInscripcion());
+//            System.out.println("Apellido"+inscripcion.getAlumno().getApellido());
+//            System.out.println("Materia"+inscripcion.getMateria().getNombre());
+//        }
+// 
+       
+         for (Materia materia:id.obtenerMateriasNOCursadas(7)){
+     
+             System.out.println("nombre"+materia.getNombre());
+         }
     }
 }
+         
+
